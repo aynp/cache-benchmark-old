@@ -1,20 +1,13 @@
 mod storage;
-use storage::Disk;
-
-mod cache;
-use cache::Cache;
-use cache::lru::LRU;
-
-use crate::cache::EvictionStrategy;
+use storage::Storage;
 
 
 fn main() {
-    let _disk = Disk::new(10);
-    let lru = LRU::new(3);
-    let mut cache = Cache::new(lru);
+    let mut storage = Storage::new(4, 10);
 
-    cache.insert(1, 10);
+    storage.put(1, 10);
+    let val = storage.get(1);
 
-    println!("{}", cache.get(1));
+    println!("{}", val);
 }
 

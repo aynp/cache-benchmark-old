@@ -1,11 +1,10 @@
-use crate::cache::lru::LRU;
-
-pub mod lru;
+mod lru;
+use lru::LRU;
 
 pub trait EvictionStrategy {
     fn new(capacity: usize) -> Self;
     fn insert(&mut self, key: usize, value: u64);
-    fn get(&mut self, key: usize) -> u64;
+    fn get(&mut self, key: usize) -> Option<u64>;
 }
 
 /*
@@ -30,7 +29,7 @@ impl Cache {
         self.eviction_strategy.insert(key, value);
     }
 
-    pub fn get(&mut self, key: usize) -> u64 {
+    pub fn get(&mut self, key: usize) -> Option<u64> {
         self.eviction_strategy.get(key)
     }
 }

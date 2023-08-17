@@ -1,22 +1,37 @@
-pub struct Disk {
-    storage: Vec<u64>,
+mod cache;
+use cache::Cache;
+
+mod disk;
+use disk::Disk;
+
+pub struct Storage {
+    cache: Cache,
+    disk: Disk,
 }
 
-impl Disk {
-    pub fn new (size: usize) -> Disk {
-        let storage: Vec<u64> = vec![0; size];
-        return Disk {
-            storage,
+impl Storage {
+    pub fn new(cache_size: usize, disk_size: usize) -> Storage {
+        let lru = cache::EvictionStrategy::new(cache_size);
+        return Storage {
+            cache: Cache::new(lru),
+            disk: Disk::new(disk_size)
         }
     }
 
-    pub fn read(&self, index: usize) -> u64 {
-        return self.storage[index];
+    pub fn get(&mut self, key: usize) -> u64 {
+        if let Some(value) = self.cache.get(key) {
+            value
+        } else {
+            let value = self.disk.read(key);
+            self.cache.insert(key, value);
+            return value;
+        }
     }
 
-    pub fn write(&mut self, index: usize, data: u64) -> bool {
-        self.storage[index] = data;
-        return true;
+    pub fn put(&mut self, key: usize, value: u64) -> bool {
+        self.cache.insert(key, value);
+        self.disk.write(key, value);
+        true
     }
 }
 
