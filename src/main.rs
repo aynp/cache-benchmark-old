@@ -3,13 +3,18 @@ use storage::Disk;
 
 mod cache;
 use cache::Cache;
+use cache::lru::LRU;
+
+use crate::cache::EvictionStrategy;
 
 
 fn main() {
-    let disk = Disk::new(10);
-    let mut cache = Cache::new(3, disk);
+    let _disk = Disk::new(10);
+    let lru = LRU::new(3);
+    let mut cache = Cache::new(lru);
 
-    cache.write(1, 10);
+    cache.insert(1, 10);
 
-    println!("{}", cache.read(1));
+    println!("{}", cache.get(1));
 }
+
