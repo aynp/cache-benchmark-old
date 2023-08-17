@@ -20,9 +20,7 @@ pub struct Cache {
 
 impl Cache {
     pub fn new(eviction_strategy: LRU) -> Self {
-        Cache {
-            eviction_strategy,
-        }
+        Cache { eviction_strategy }
     }
 
     pub fn insert(&mut self, key: usize, value: u64) {
@@ -33,4 +31,3 @@ impl Cache {
         self.eviction_strategy.get(key)
     }
 }
-

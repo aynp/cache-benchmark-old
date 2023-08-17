@@ -1,5 +1,5 @@
-use std::collections::{HashMap, VecDeque};
 use crate::storage::cache::EvictionStrategy;
+use std::collections::{HashMap, VecDeque};
 
 pub struct LRU {
     cache: HashMap<usize, u64>,
@@ -9,11 +9,11 @@ pub struct LRU {
 
 impl EvictionStrategy for LRU {
     fn new(capacity: usize) -> LRU {
-        return LRU{
+        return LRU {
             cache: HashMap::with_capacity(capacity),
             order: VecDeque::new(),
             capacity,
-        }
+        };
     }
 
     fn insert(&mut self, key: usize, value: u64) {
@@ -36,4 +36,3 @@ impl EvictionStrategy for LRU {
         }
     }
 }
-

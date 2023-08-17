@@ -3,11 +3,9 @@ pub struct Disk {
 }
 
 impl Disk {
-    pub fn new (size: usize) -> Disk {
+    pub fn new(size: usize) -> Disk {
         let storage: Vec<u64> = vec![0; size];
-        return Disk {
-            storage,
-        }
+        return Disk { storage };
     }
 
     pub fn read(&self, index: usize) -> u64 {
@@ -19,4 +17,3 @@ impl Disk {
         return true;
     }
 }
-

@@ -1,7 +1,6 @@
 mod storage;
 use storage::Storage;
 
-
 fn main() {
     let mut storage = Storage::new(4, 10);
 
@@ -10,4 +9,3 @@ fn main() {
 
     println!("{}", val);
 }
-

@@ -14,8 +14,8 @@ impl Storage {
         let lru = cache::EvictionStrategy::new(cache_size);
         return Storage {
             cache: Cache::new(lru),
-            disk: Disk::new(disk_size)
-        }
+            disk: Disk::new(disk_size),
+        };
     }
 
     pub fn get(&mut self, key: usize) -> u64 {
@@ -34,4 +34,3 @@ impl Storage {
         true
     }
 }
-
