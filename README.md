@@ -2,6 +2,9 @@
 
 This program aims to impliment various cache eviction techniques and write policies. There will be tests in order to test the best performing technique for various testcases.
 
+> [!WARNING]
+> The project will undergo drastic changes in it's design, structure and featues as I'm still learning rust.
+
 ## Design
 ### `storage` module
 - Abstracts the working of cache and disk storage
@@ -25,6 +28,3 @@ This program aims to impliment various cache eviction techniques and write polic
 
 ## Results
 WIP
-
-> [!NOTE]
-> The project will undergo drastic changes in it's structure, as I'm still learning rust.
